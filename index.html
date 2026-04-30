@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Диплом Чемпионки</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -370,66 +373,69 @@ body::before {
 }
 .lamp.lit + .lamp-hint, .lamp:hover ~ .lamp-hint { opacity: 0; }
 
-/* UPLOADS ====================== */
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+/* TELEGRAM CTA ====================== */
+.send-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
   margin-top: 28px;
-}
-
-.upload-box {
-  border: 1.5px dashed rgba(228,185,98,0.3);
+  padding: 18px 24px;
+  background: linear-gradient(135deg, rgba(228,185,98,0.15), rgba(240,168,168,0.10));
+  border: 1.5px solid rgba(228,185,98,0.4);
   border-radius: 16px;
-  padding: 22px 18px;
-  text-align: center;
-  transition: all 0.35s ease;
+  color: var(--gold-bright);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
   cursor: pointer;
-  background: rgba(0,0,0,0.18);
+  transition: all 0.35s cubic-bezier(.2,.7,.3,1);
   position: relative;
   overflow: hidden;
 }
-.upload-box:hover {
+.send-cta:hover {
+  background: linear-gradient(135deg, rgba(228,185,98,0.25), rgba(240,168,168,0.18));
   border-color: var(--gold);
-  background: rgba(228,185,98,0.06);
   transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(228,185,98,0.2);
 }
-.upload-box input[type="file"] { display: none; }
+.send-cta:active { transform: translateY(0); }
+.send-cta svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.send-cta-arrow {
+  margin-left: 6px;
+  font-size: 18px;
+  transition: transform 0.3s;
+  opacity: 0.7;
+}
+.send-cta:hover .send-cta-arrow { transform: translateX(4px); opacity: 1; }
 
-.upload-icon {
-  font-size: 22px;
-  color: var(--gold);
-  margin-bottom: 8px;
-  opacity: 0.8;
-}
-.upload-label {
-  font-size: 11px;
-  color: var(--gold);
+.chapter.lit .send-cta { display: none; }
+
+/* статус-бейдж "принято" для зажжённых */
+.received-badge {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 12px 18px;
+  background: rgba(228,185,98,0.10);
+  border: 1px solid rgba(228,185,98,0.3);
+  border-radius: 100px;
+  color: var(--gold-bright);
+  font-size: 12px;
+  font-weight: 600;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  font-weight: 600;
-  margin-bottom: 6px;
 }
-.upload-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  color: var(--cream);
-  font-style: italic;
-}
-.upload-box.uploaded {
-  border-style: solid;
-  border-color: var(--gold);
-  background: linear-gradient(135deg, rgba(228,185,98,0.12), rgba(240,168,168,0.08));
-}
-.upload-box.uploaded .upload-text {
-  color: var(--gold-bright);
-  font-style: normal;
-  font-weight: 500;
-  font-family: 'Manrope', sans-serif;
-  font-size: 13px;
-  word-break: break-word;
-}
-.upload-box.uploaded .upload-icon::before { content: '✓'; }
+.chapter.lit .received-badge { display: inline-flex; }
 
 /* PRIZE ====================== */
 .prize-section {
@@ -447,7 +453,7 @@ body::before {
   transition: all 0.6s ease;
   overflow: hidden;
 }
-.prize-section.locked {
+.chapter:not(.lit) .prize-section {
   background: linear-gradient(135deg, rgba(240,168,168,0.04), rgba(228,185,98,0.03));
 }
 .prize-label {
@@ -465,7 +471,7 @@ body::before {
   color: var(--cream);
   line-height: 1.5;
 }
-.prize-section.locked .prize-content {
+.chapter:not(.lit) .prize-content {
   filter: blur(10px);
   opacity: 0.35;
   user-select: none;
@@ -485,7 +491,7 @@ body::before {
   background: rgba(12,8,32,0.4);
   backdrop-filter: blur(2px);
 }
-.prize-section.locked .prize-lock-overlay { display: flex; }
+.chapter:not(.lit) .prize-lock-overlay { display: flex; }
 .prize-lock-icon {
   font-size: 28px;
   margin-bottom: 4px;
@@ -678,7 +684,8 @@ body::before {
     margin-top: 8px;
   }
   .lamp { width: 70px; height: 95px; }
-  .actions { grid-template-columns: 1fr; gap: 14px; margin-top: 22px; }
+  .actions { display: none; }
+  .send-cta { font-size: 13px; padding: 16px 18px; letter-spacing: 1.5px; margin-top: 22px; }
   .superprize { padding: 40px 24px; }
   .superprize h2 { font-size: 28px; letter-spacing: 3px; }
   .superprize .subtitle-sp { font-size: 16px; }
@@ -730,16 +737,16 @@ body::before {
   <section class="chapters">
 
     <!-- I -->
-    <article class="chapter" data-chapter="1" data-deadline="2026-05-02T23:00:00">
+    <article class="chapter" data-chapter="1" data-deadline="2026-06-02T23:00:00">
       <div class="chapter-head">
         <div class="roman">I</div>
         <div class="chapter-info">
           <h3>Глава 1 + Введение</h3>
-          <div class="deadline"><span class="deadline-dot"></span>До 02.05.2026 · 23:00</div>
+          <div class="deadline"><span class="deadline-dot"></span>До 02.06.2026 · 23:00</div>
           <div class="countdown" data-cd></div>
         </div>
         <div class="lamp-cell">
-          <div class="lamp" role="button" aria-label="Зажечь лампу">
+          <div class="lamp" aria-hidden="true">
             <svg viewBox="0 0 90 120">
               <path class="bulb-glass" d="M 45,8 C 24,8 12,24 12,42 C 12,55 19,63 24,72 C 26,76 27,80 27,84 L 63,84 C 63,80 64,76 66,72 C 71,63 78,55 78,42 C 78,24 66,8 45,8 Z"/>
               <path class="bulb-filament" d="M 30,42 Q 38,28 45,42 Q 52,28 60,42"/>
@@ -752,21 +759,13 @@ body::before {
           </div>
         </div>
       </div>
-      <div class="actions">
-        <label class="upload-box" data-up="chapter">
-          <input type="file" accept=".doc,.docx,.pdf,.txt,.rtf,.tex">
-          <div class="upload-icon">📎</div>
-          <div class="upload-label">Загрузить главу</div>
-          <div class="upload-text">Нажми и выбери файл</div>
-        </label>
-        <label class="upload-box" data-up="prize-file">
-          <input type="file">
-          <div class="upload-icon">🎁</div>
-          <div class="upload-label">Файл приза</div>
-          <div class="upload-text">Только для меня</div>
-        </label>
-      </div>
-      <div class="prize-section locked">
+      <a class="send-cta" href="https://t.me/apirumov" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        <span>Отправить главу</span>
+        <span class="send-cta-arrow">→</span>
+      </a>
+      <div class="received-badge">✦ Глава принята ✦</div>
+      <div class="prize-section">
         <div class="prize-label">✦  Приз ✦</div>
         <div class="prize-content">
           <!-- ✏️ ПРИЗ ДЛЯ ГЛАВЫ I — отредактируй текст или вставь сюда что хочешь -->
@@ -789,7 +788,7 @@ body::before {
           <div class="countdown" data-cd></div>
         </div>
         <div class="lamp-cell">
-          <div class="lamp" role="button" aria-label="Зажечь лампу">
+          <div class="lamp" aria-hidden="true">
             <svg viewBox="0 0 90 120">
               <path class="bulb-glass" d="M 45,8 C 24,8 12,24 12,42 C 12,55 19,63 24,72 C 26,76 27,80 27,84 L 63,84 C 63,80 64,76 66,72 C 71,63 78,55 78,42 C 78,24 66,8 45,8 Z"/>
               <path class="bulb-filament" d="M 30,42 Q 38,28 45,42 Q 52,28 60,42"/>
@@ -802,21 +801,13 @@ body::before {
           </div>
         </div>
       </div>
-      <div class="actions">
-        <label class="upload-box" data-up="chapter">
-          <input type="file" accept=".doc,.docx,.pdf,.txt,.rtf,.tex">
-          <div class="upload-icon">📎</div>
-          <div class="upload-label">Загрузить главу</div>
-          <div class="upload-text">Нажми и выбери файл</div>
-        </label>
-        <label class="upload-box" data-up="prize-file">
-          <input type="file">
-          <div class="upload-icon">🎁</div>
-          <div class="upload-label">Файл приза</div>
-          <div class="upload-text">Только для меня</div>
-        </label>
-      </div>
-      <div class="prize-section locked">
+      <a class="send-cta" href="https://t.me/apirumov" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        <span>Отправить главу</span>
+        <span class="send-cta-arrow">→</span>
+      </a>
+      <div class="received-badge">✦ Глава принята ✦</div>
+      <div class="prize-section">
         <div class="prize-label">✦ Приз ✦</div>
         <div class="prize-content">
           <!-- ✏️ ПРИЗ ДЛЯ ГЛАВЫ II — отредактируй -->
@@ -839,7 +830,7 @@ body::before {
           <div class="countdown" data-cd></div>
         </div>
         <div class="lamp-cell">
-          <div class="lamp" role="button" aria-label="Зажечь лампу">
+          <div class="lamp" aria-hidden="true">
             <svg viewBox="0 0 90 120">
               <path class="bulb-glass" d="M 45,8 C 24,8 12,24 12,42 C 12,55 19,63 24,72 C 26,76 27,80 27,84 L 63,84 C 63,80 64,76 66,72 C 71,63 78,55 78,42 C 78,24 66,8 45,8 Z"/>
               <path class="bulb-filament" d="M 30,42 Q 38,28 45,42 Q 52,28 60,42"/>
@@ -852,21 +843,13 @@ body::before {
           </div>
         </div>
       </div>
-      <div class="actions">
-        <label class="upload-box" data-up="chapter">
-          <input type="file" accept=".doc,.docx,.pdf,.txt,.rtf,.tex">
-          <div class="upload-icon">📎</div>
-          <div class="upload-label">Загрузить главу</div>
-          <div class="upload-text">Нажми и выбери файл</div>
-        </label>
-        <label class="upload-box" data-up="prize-file">
-          <input type="file">
-          <div class="upload-icon">🎁</div>
-          <div class="upload-label">Файл приза</div>
-          <div class="upload-text">Только для меня</div>
-        </label>
-      </div>
-      <div class="prize-section locked">
+      <a class="send-cta" href="https://t.me/apirumov" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        <span>Отправить главу</span>
+        <span class="send-cta-arrow">→</span>
+      </a>
+      <div class="received-badge">✦ Глава принята ✦</div>
+      <div class="prize-section">
         <div class="prize-label">✦ Приз ✦</div>
         <div class="prize-content">
           <!-- ✏️ ПРИЗ ДЛЯ ГЛАВЫ III — отредактируй -->
@@ -889,7 +872,7 @@ body::before {
           <div class="countdown" data-cd></div>
         </div>
         <div class="lamp-cell">
-          <div class="lamp" role="button" aria-label="Зажечь лампу">
+          <div class="lamp" aria-hidden="true">
             <svg viewBox="0 0 90 120">
               <path class="bulb-glass" d="M 45,8 C 24,8 12,24 12,42 C 12,55 19,63 24,72 C 26,76 27,80 27,84 L 63,84 C 63,80 64,76 66,72 C 71,63 78,55 78,42 C 78,24 66,8 45,8 Z"/>
               <path class="bulb-filament" d="M 30,42 Q 38,28 45,42 Q 52,28 60,42"/>
@@ -902,21 +885,13 @@ body::before {
           </div>
         </div>
       </div>
-      <div class="actions">
-        <label class="upload-box" data-up="chapter">
-          <input type="file" accept=".doc,.docx,.pdf,.txt,.rtf,.tex">
-          <div class="upload-icon">📎</div>
-          <div class="upload-label">Загрузить главу</div>
-          <div class="upload-text">Нажми и выбери файл</div>
-        </label>
-        <label class="upload-box" data-up="prize-file">
-          <input type="file">
-          <div class="upload-icon">🎁</div>
-          <div class="upload-label">Файл приза</div>
-          <div class="upload-text">Только для меня</div>
-        </label>
-      </div>
-      <div class="prize-section locked">
+      <a class="send-cta" href="https://t.me/apirumov" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        <span>Отправить главу</span>
+        <span class="send-cta-arrow">→</span>
+      </a>
+      <div class="received-badge">✦ Глава принята ✦</div>
+      <div class="prize-section">
         <div class="prize-label">✦ Приз ✦</div>
         <div class="prize-content">
           <!-- ✏️ ПРИЗ ДЛЯ ГЛАВЫ IV — отредактируй -->
@@ -939,7 +914,7 @@ body::before {
           <div class="countdown" data-cd></div>
         </div>
         <div class="lamp-cell">
-          <div class="lamp" role="button" aria-label="Зажечь лампу">
+          <div class="lamp" aria-hidden="true">
             <svg viewBox="0 0 90 120">
               <path class="bulb-glass" d="M 45,8 C 24,8 12,24 12,42 C 12,55 19,63 24,72 C 26,76 27,80 27,84 L 63,84 C 63,80 64,76 66,72 C 71,63 78,55 78,42 C 78,24 66,8 45,8 Z"/>
               <path class="bulb-filament" d="M 30,42 Q 38,28 45,42 Q 52,28 60,42"/>
@@ -952,21 +927,13 @@ body::before {
           </div>
         </div>
       </div>
-      <div class="actions">
-        <label class="upload-box" data-up="chapter">
-          <input type="file" accept=".doc,.docx,.pdf,.txt,.rtf,.tex">
-          <div class="upload-icon">📎</div>
-          <div class="upload-label">Загрузить заключение</div>
-          <div class="upload-text">Нажми и выбери файл</div>
-        </label>
-        <label class="upload-box" data-up="prize-file">
-          <input type="file">
-          <div class="upload-icon">🎁</div>
-          <div class="upload-label">Файл приза</div>
-          <div class="upload-text">Только для меня</div>
-        </label>
-      </div>
-      <div class="prize-section locked">
+      <a class="send-cta" href="https://t.me/apirumov" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        <span>Отправить главу</span>
+        <span class="send-cta-arrow">→</span>
+      </a>
+      <div class="received-badge">✦ Глава принята ✦</div>
+      <div class="prize-section">
         <div class="prize-label">✦ Приз ✦</div>
         <div class="prize-content">
           <!-- ✏️ ПРИЗ ДЛЯ ЗАКЛЮЧЕНИЯ — отредактируй -->
@@ -1016,65 +983,61 @@ body::before {
 </div>
 
 <script>
-// ============== СОСТОЯНИЕ ==============
+// ╔══════════════════════════════════════════════════════════════════╗
+// ║                                                                  ║
+// ║   ✏️   Р Е Д А К Т И Р У Й   Т О Л Ь К О   Б Л О К   Н И Ж Е    ║
+// ║                                                                  ║
+// ║   Чтобы ЗАЖЕЧЬ лампу — поставь lit: true                        ║
+// ║   Чтобы ВПИСАТЬ ПРИЗ — замени строку prize: "..."                ║
+// ║   В prize можно использовать HTML:                               ║
+// ║      <br>           — перенос строки                             ║
+// ║      <b>текст</b>   — жирный                                     ║
+// ║      <i>текст</i>   — курсив                                     ║
+// ║      <img src="ИМЯ_ФАЙЛА.jpg" style="max-width:100%">             ║
+// ║      <a href="ССЫЛКА">текст</a>                                  ║
+// ║                                                                  ║
+// ╚══════════════════════════════════════════════════════════════════╝
+
+const STATE = {
+  chapters: [
+    { lit: false, prize: "Сюрприз ждёт тебя здесь" },  // I — Глава 1 + Введение
+    { lit: false, prize: "Сюрприз ждёт тебя здесь" },  // II — Глава 2
+    { lit: false, prize: "Сюрприз ждёт тебя здесь" },  // III — Глава 3
+    { lit: false, prize: "Сюрприз ждёт тебя здесь" },  // IV — Глава 4
+    { lit: false, prize: "Сюрприз ждёт тебя здесь" },  // V — Заключение
+  ],
+  superprize: 'Здесь то, ради чего всё затевалось<br><span style="font-size: 17px; color: var(--cream-dim);">— и об этом ты узнаешь, только пройдя все испытания —</span>'
+};
+
+// ════════════════════════════════════════════════════════════════════
+// Ниже — служебный код, его трогать не нужно
+// ════════════════════════════════════════════════════════════════════
+
 const totalChapters = 5;
 
-function lit() {
-  return document.querySelectorAll('.chapter.lit').length;
-}
+function applyState() {
+  const chapters = document.querySelectorAll('.chapter');
+  chapters.forEach((ch, i) => {
+    const cfg = STATE.chapters[i];
+    if (!cfg) return;
+    ch.classList.toggle('lit', !!cfg.lit);
+    ch.querySelector('.lamp').classList.toggle('lit', !!cfg.lit);
+    ch.querySelector('.prize-content').innerHTML = cfg.prize;
+  });
 
-function refreshSuperprize() {
-  const n = lit();
-  document.getElementById('lit-count').textContent = n;
-  const minis = document.querySelectorAll('#progress .mini-lamp');
-  minis.forEach((m, i) => m.classList.toggle('lit', i < n));
+  // супер-приз
+  const litCount = STATE.chapters.filter(c => c.lit).length;
+  document.getElementById('lit-count').textContent = litCount;
+  document.querySelectorAll('#progress .mini-lamp').forEach((m, i) => {
+    m.classList.toggle('lit', i < litCount);
+  });
   const sp = document.querySelector('.superprize');
-  const wasUnlocked = sp.classList.contains('unlocked');
-  if (n === totalChapters) {
+  document.querySelector('.superprize-content').innerHTML = STATE.superprize;
+  if (litCount === totalChapters) {
     sp.classList.add('unlocked');
-    if (!wasUnlocked) celebrate();
-  } else {
-    sp.classList.remove('unlocked');
+    setTimeout(celebrate, 400);
   }
 }
-
-// ============== ЛАМПЫ ==============
-document.querySelectorAll('.chapter').forEach(ch => {
-  const lamp = ch.querySelector('.lamp');
-  const prize = ch.querySelector('.prize-section');
-
-  lamp.addEventListener('click', () => {
-    const isLit = ch.classList.toggle('lit');
-    lamp.classList.toggle('lit', isLit);
-    prize.classList.toggle('locked', !isLit);
-    refreshSuperprize();
-  });
-});
-
-// ============== ЗАГРУЗКА ФАЙЛОВ ==============
-document.querySelectorAll('.upload-box').forEach(box => {
-  const input = box.querySelector('input[type="file"]');
-  const text = box.querySelector('.upload-text');
-  const role = box.dataset.up;
-
-  input.addEventListener('change', e => {
-    const file = e.target.files[0];
-    if (!file) return;
-    box.classList.add('uploaded');
-    text.textContent = file.name;
-
-    // загрузка главы автоматически зажигает лампу
-    if (role === 'chapter') {
-      const ch = box.closest('.chapter');
-      const lamp = ch.querySelector('.lamp');
-      const prize = ch.querySelector('.prize-section');
-      ch.classList.add('lit');
-      lamp.classList.add('lit');
-      prize.classList.remove('locked');
-      refreshSuperprize();
-    }
-  });
-});
 
 // ============== СЧЁТЧИКИ ВРЕМЕНИ ==============
 function updateCountdowns() {
@@ -1091,16 +1054,18 @@ function updateCountdowns() {
       return;
     }
 
-    const days = Math.floor(diff / 86400000);
+    const days  = Math.floor(diff / 86400000);
     const hours = Math.floor((diff % 86400000) / 3600000);
     const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
 
-    let txt = 'осталось ';
-    if (days > 0) txt += `${days} ${plural(days, ['день','дня','дней'])}`;
-    if (days > 0 && hours > 0) txt += ` ${hours} ч`;
-    if (days === 0) txt += `${hours} ч ${mins} мин`;
+    const parts = [];
+    if (days > 0)  parts.push(`${days} ${plural(days,  ['день','дня','дней'])}`);
+    if (days > 0 || hours > 0) parts.push(`${hours} ${plural(hours, ['час','часа','часов'])}`);
+    parts.push(`${mins} ${plural(mins, ['минута','минуты','минут'])}`);
+    parts.push(`${secs} ${plural(secs, ['секунда','секунды','секунд'])}`);
 
-    cd.textContent = txt;
+    cd.textContent = 'осталось ' + parts.join(' ');
     cd.classList.toggle('urgent', diff < 86400000 * 2);
     cd.classList.remove('passed');
   });
@@ -1115,13 +1080,10 @@ function plural(n, forms) {
   return forms[2];
 }
 
-updateCountdowns();
-setInterval(updateCountdowns, 30000);
-
 // ============== КОНФЕТТИ ==============
 function celebrate() {
   const colors = ['#e4b962', '#f7d68a', '#f0a8a8', '#f6efe0', '#c97474'];
-  const n = 80;
+  const n = 100;
   for (let i = 0; i < n; i++) {
     const c = document.createElement('div');
     c.className = 'confetti go';
@@ -1135,6 +1097,11 @@ function celebrate() {
     setTimeout(() => c.remove(), 6000);
   }
 }
+
+// ============== ЗАПУСК ==============
+applyState();
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
 </script>
 
 </body>
