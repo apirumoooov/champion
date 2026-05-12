@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Глава 04 · Суздаль · 29 мая</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f2e7d0;
+  --paper: #ebdfc4;
+  --paper-elev: #f7eed8;
+  --ink: #1c1610;
+  --ink-mute: #6b5d48;
+  --ink-faint: #b4a484;
+  --accent: #244a6e;
+  --accent-deep: #18365a;
+  --gold: #ad8a3f;
+  --gold-soft: #c9a85c;
+  --red: #97443e;
+  --line: rgba(28,22,16,0.13);
+  --line-soft: rgba(28,22,16,0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 65% 45% at 100% 0%, rgba(36,74,110,0.10), transparent 60%),
+    radial-gradient(ellipse 55% 40% at 0% 100%, rgba(173,138,63,0.10), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  padding: 24px 16px 60px;
+  position: relative;
+}
+
+/* paper grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.40 0 0 0 0 0.32 0 0 0 0 0.20 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--paper-elev);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(36,74,110,0.04),
+    0 40px 80px -24px rgba(28,22,16,0.20),
+    0 12px 24px -8px rgba(28,22,16,0.10);
+}
+
+/* TOP STRIP */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 30px;
+  border-bottom: 1px dashed var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  background: rgba(255,255,255,0.35);
+}
+
+.top .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(36,74,110,0.4);
+  animation: breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.78); }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 56px 30px 30px;
+  overflow: hidden;
+}
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  max-width: 140px;
+}
+
+.title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(44px, 10vw, 86px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+  color: var(--ink);
+}
+
+.title .italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(15px, 2.6vw, 18px);
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin-top: 18px;
+}
+
+.info-chips {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px 7px 12px;
+  background: rgba(36,74,110,0.08);
+  border: 1px solid rgba(36,74,110,0.20);
+  border-radius: 100px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.chip svg {
+  width: 13px;
+  height: 13px;
+}
+
+.chip.gold {
+  background: rgba(173,138,63,0.10);
+  border-color: rgba(173,138,63,0.30);
+  color: var(--gold);
+}
+
+/* SKYLINE */
+.skyline-wrap {
+  position: relative;
+  margin: 32px -30px 0;
+  padding: 20px 0 0;
+  background: linear-gradient(180deg, rgba(36,74,110,0.04), rgba(36,74,110,0.10));
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  overflow: hidden;
+}
+
+.skyline-wrap::before {
+  content: "СУЗДАЛЬ";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 100px;
+  color: rgba(36,74,110,0.06);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skyline-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* MESSAGE */
+.message {
+  padding: 44px 30px 32px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.message-hi {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 4.4vw, 30px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+  color: var(--ink);
+}
+
+.message-hi .accent {
+  color: var(--accent);
+}
+
+.message-body {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.message-body p + p { margin-top: 14px; }
+
+.message-body strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.message-body .gold {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* PROGRAM */
+.program-section {
+  padding: 38px 30px 8px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.phase {
+  margin-bottom: 26px;
+}
+
+.phase-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.phase-num {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  min-width: 44px;
+}
+
+.phase-title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.phase-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: var(--ink-mute);
+  margin-left: auto;
+}
+
+.phase-steps {
+  padding-left: 60px;
+  position: relative;
+}
+
+.phase-steps::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 2px;
+  bottom: 6px;
+  width: 1px;
+  background: repeating-linear-gradient(180deg, var(--accent) 0 4px, transparent 4px 8px);
+  opacity: 0.4;
+}
+
+.step {
+  position: relative;
+  padding: 6px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.step::before {
+  content: "";
+  position: absolute;
+  left: -41px;
+  top: 14px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper-elev);
+  border: 1.5px solid var(--accent);
+}
+
+.step-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-mute);
+  min-width: 64px;
+  letter-spacing: 0.04em;
+  padding-top: 2px;
+}
+
+.step-text {
+  flex: 1;
+}
+
+/* SECRET BLOCK */
+.secret {
+  position: relative;
+  margin: 30px 0 8px;
+  padding: 28px 28px 32px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(36,74,110,0.05) 0 16px,
+      transparent 16px 32px),
+    linear-gradient(135deg, rgba(151,68,62,0.05), rgba(173,138,63,0.05));
+  border: 1.5px solid var(--accent);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.secret::before {
+  content: "??";
+  position: absolute;
+  top: -18px;
+  right: 18px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 120px;
+  color: rgba(36,74,110,0.10);
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+
+.secret-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--red);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.secret-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--red) 0 4px, transparent 4px 8px);
+  max-width: 220px;
+  opacity: 0.7;
+}
+
+.secret-title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  color: var(--accent-deep);
+  margin-bottom: 8px;
+  line-height: 1.05;
+}
+
+.secret-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 480px;
+}
+
+.secret-seal {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-12deg);
+  z-index: 2;
+}
+
+/* MAP / ROUTE */
+.route-section {
+  padding: 36px 30px 32px;
+  border-top: 1px dashed var(--line);
+  background: linear-gradient(180deg, rgba(36,74,110,0.03), transparent 50%);
+}
+
+.route-wrap {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 24px 18px;
+  overflow: hidden;
+}
+
+.route-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* DETAILS */
+.details {
+  padding: 12px 30px 36px;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: flex-start;
+}
+
+.detail-row:last-child { border-bottom: none; }
+
+.detail-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  min-width: 100px;
+  padding-top: 2px;
+}
+
+.detail-val {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.detail-val strong {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+/* responsive */
+@media (max-width: 540px) {
+  .hero { padding: 40px 22px 22px; }
+  .message, .program-section, .route-section, .details { padding-left: 22px; padding-right: 22px; }
+  .top { padding: 14px 22px; }
+  .phase-head { flex-wrap: wrap; }
+  .phase-sub { margin-left: 0; }
+  .phase-steps { padding-left: 50px; }
+  .step::before { left: -34px; }
+  .step-time { min-width: 56px; font-size: 10.5px; }
+  .skyline-wrap::before { font-size: 64px; }
+  .secret { padding: 22px 20px 26px; }
+  .secret-title { font-size: 22px; }
+  .secret-text { font-size: 15px; }
+  .secret::before { font-size: 80px; }
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  .card { max-width: 100%; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- TOP STRIP -->
+  <div class="top">
+    <div class="left">
+      <span class="dot"></span>
+      <span>29.05.2026 · Суздаль · день вне дома</span>
+    </div>
+    <div class="right">Глава 04 / 04</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Сертификат · Подарок · Глава 04 — финал</div>
+    <h1 class="title">Едем в <span class="italic">Суздаль.</span></h1>
+    <div class="subtitle">29 мая · машина · день без Москвы</div>
+    <div class="info-chips">
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> 29 мая · с утра</div>
+      <div class="chip gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 16h-3l-2 4-3-6 4-1V8a3 3 0 116 0v5l4 1-3 6-2-4z"/></svg> на машине</div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ~ 14 часов вне дома</div>
+    </div>
+
+    <!-- SUZDAL SKYLINE -->
+    <div class="skyline-wrap">
+      <svg class="skyline-svg" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- sun glow -->
+        <defs>
+          <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#c9a85c" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#c9a85c" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="580" cy="60" r="50" fill="url(#sun)"/>
+        <circle cx="580" cy="60" r="14" fill="#c9a85c" opacity="0.75"/>
+
+        <!-- distant trees / horizon -->
+        <path d="M 0 168 Q 50 162 90 165 T 200 168 T 320 162 T 450 168 T 700 164 L 700 200 L 0 200 Z" fill="rgba(36,74,110,0.10)"/>
+        <line x1="0" y1="172" x2="700" y2="172" stroke="rgba(28,22,16,0.18)" stroke-width="0.8" stroke-dasharray="2 4"/>
+
+        <!-- SUZDAL silhouette - cluster of churches with onion domes -->
+        <!-- Church 1 (left, smaller) -->
+        <g transform="translate(120, 100)">
+          <!-- drum -->
+          <rect x="-8" y="20" width="16" height="50" fill="#244a6e"/>
+          <!-- onion dome -->
+          <path d="M -10 22 C -10 10, -6 4, 0 0 C 6 4, 10 10, 10 22 Z" fill="#244a6e"/>
+          <!-- cross -->
+          <line x1="0" y1="0" x2="0" y2="-10" stroke="#ad8a3f" stroke-width="1.5"/>
+          <line x1="-3" y1="-6" x2="3" y2="-6" stroke="#ad8a3f" stroke-width="1.5"/>
+        </g>
+
+        <!-- Church 2 (main, central, taller) -->
+        <g transform="translate(200, 70)">
+          <!-- base / tower -->
+          <rect x="-22" y="55" width="44" height="50" fill="#1c1610"/>
+          <!-- drum -->
+          <rect x="-12" y="30" width="24" height="28" fill="#244a6e"/>
+          <!-- onion dome (blue) -->
+          <path d="M -15 32 C -15 14, -10 4, 0 0 C 10 4, 15 14, 15 32 Z" fill="#244a6e"/>
+          <!-- highlight band on dome -->
+          <path d="M -10 18 Q 0 14, 10 18" stroke="#3a6699" stroke-width="1" fill="none" opacity="0.7"/>
+          <!-- cross -->
+          <line x1="0" y1="0" x2="0" y2="-14" stroke="#ad8a3f" stroke-width="1.8"/>
+          <line x1="-4" y1="-9" x2="4" y2="-9" stroke="#ad8a3f" stroke-width="1.8"/>
+          <line x1="-3" y1="-4" x2="3" y2="-4" stroke="#ad8a3f" stroke-width="1.5"/>
+        </g>
+
+        <!-- Church 3 (gold dome, mid-right) -->
+        <g transform="translate(290, 95)">
+          <rect x="-9" y="22" width="18" height="58" fill="#1c1610"/>
+          <rect x="-7" y="38" width="3" height="10" fill="#ad8a3f" opacity="0.5"/>
+          <rect x="4" y="38" width="3" height="10" fill="#ad8a3f" opacity="0.5"/>
+          <!-- drum -->
+          <rect x="-10" y="18" width="20" height="22" fill="#1c1610"/>
+          <!-- onion dome (gold) -->
+          <path d="M -11 22 C -11 8, -7 2, 0 0 C 7 2, 11 8, 11 22 Z" fill="#ad8a3f"/>
+          <!-- highlight -->
+          <path d="M -7 12 Q 0 9, 7 12" stroke="#d9b766" stroke-width="0.8" fill="none" opacity="0.8"/>
+          <!-- cross -->
+          <line x1="0" y1="0" x2="0" y2="-10" stroke="#ad8a3f" stroke-width="1.5"/>
+          <line x1="-3" y1="-6" x2="3" y2="-6" stroke="#ad8a3f" stroke-width="1.5"/>
+        </g>
+
+        <!-- Kremlin tower (wooden) -->
+        <g transform="translate(370, 105)">
+          <!-- main tower -->
+          <rect x="-14" y="20" width="28" height="50" fill="#6b5d48"/>
+          <!-- top -->
+          <polygon points="-14,20 14,20 0,-2" fill="#6b5d48"/>
+          <!-- spire -->
+          <line x1="0" y1="-2" x2="0" y2="-16" stroke="#1c1610" stroke-width="1.5"/>
+          <!-- small flag -->
+          <polygon points="0,-16 6,-13 0,-10" fill="#97443e"/>
+        </g>
+
+        <!-- Church 4 (right cluster, three domes) -->
+        <g transform="translate(450, 95)">
+          <!-- base -->
+          <rect x="-25" y="40" width="50" height="40" fill="#1c1610"/>
+          <!-- central tall dome -->
+          <g transform="translate(0, 12)">
+            <rect x="-8" y="14" width="16" height="14" fill="#244a6e"/>
+            <path d="M -10 16 C -10 4, -6 0, 0 -4 C 6 0, 10 4, 10 16 Z" fill="#244a6e"/>
+            <line x1="0" y1="-4" x2="0" y2="-14" stroke="#ad8a3f" stroke-width="1.5"/>
+            <line x1="-3" y1="-10" x2="3" y2="-10" stroke="#ad8a3f" stroke-width="1.5"/>
+          </g>
+          <!-- left small dome -->
+          <g transform="translate(-16, 28)">
+            <rect x="-4" y="6" width="8" height="6" fill="#244a6e"/>
+            <path d="M -5 8 C -5 2, -3 0, 0 -2 C 3 0, 5 2, 5 8 Z" fill="#244a6e"/>
+            <line x1="0" y1="-2" x2="0" y2="-7" stroke="#ad8a3f" stroke-width="1"/>
+          </g>
+          <!-- right small dome -->
+          <g transform="translate(16, 28)">
+            <rect x="-4" y="6" width="8" height="6" fill="#244a6e"/>
+            <path d="M -5 8 C -5 2, -3 0, 0 -2 C 3 0, 5 2, 5 8 Z" fill="#244a6e"/>
+            <line x1="0" y1="-2" x2="0" y2="-7" stroke="#ad8a3f" stroke-width="1"/>
+          </g>
+        </g>
+
+        <!-- Lone church far right -->
+        <g transform="translate(530, 115)">
+          <rect x="-7" y="14" width="14" height="40" fill="#244a6e"/>
+          <path d="M -9 16 C -9 6, -6 2, 0 -2 C 6 2, 9 6, 9 16 Z" fill="#244a6e"/>
+          <line x1="0" y1="-2" x2="0" y2="-10" stroke="#ad8a3f" stroke-width="1.2"/>
+          <line x1="-3" y1="-6" x2="3" y2="-6" stroke="#ad8a3f" stroke-width="1.2"/>
+        </g>
+
+        <!-- birds in sky -->
+        <path d="M 80 50 q 4 -3 8 0 q 4 -3 8 0" stroke="#1c1610" stroke-width="1" fill="none" opacity="0.4"/>
+        <path d="M 130 35 q 3 -2 6 0 q 3 -2 6 0" stroke="#1c1610" stroke-width="0.8" fill="none" opacity="0.35"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- MESSAGE -->
+  <div class="message">
+    <div class="message-hi">Йоу, <span class="accent">чемпион.</span></div>
+    <div class="message-body">
+      <p>Готовь маленькую сумочку, наушники и книгу. <strong>29 мая</strong> на весь день выпадаем из Москвы — едем в <strong>Суздаль</strong>. Один из старейших городов Руси, 10 тысяч жителей, тысяча лет, около сорока церквей и куполов. Город-музей в чистом виде. Дорога — около <strong>2 часов в одну сторону</strong>, машину беру я.</p>
+      <p>Утром выезжаем, завтракаем по дороге, гуляем по старому городу, обедаем, гуляем ещё. Потом <span class="gold">сюрпризная музейная часть</span> — но об этом ниже. Закат, ужин, и обратно домой.</p>
+      <p>День длинный, но это день <strong>вне Москвы</strong> и без диплома. Будет тихо, красиво и по-другому.</p>
+    </div>
+  </div>
+
+  <!-- PROGRAM -->
+  <div class="program-section">
+    <div class="section-label">Программа дня</div>
+
+    <!-- Phase 1: Утро -->
+    <div class="phase">
+      <div class="phase-head">
+        <div class="phase-num">01</div>
+        <div class="phase-title">Утро · выезжаем</div>
+        <div class="phase-sub">~ 2,5 часа</div>
+      </div>
+      <div class="phase-steps">
+        <div class="step">
+          <div class="step-time">~ 09:00</div>
+          <div class="step-text">Сбор. Кофе с собой, плед на заднее сиденье. Включаю плейлист.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 10:00</div>
+          <div class="step-text">Завтрак по дороге — есть пара хороших мест на М7. Точку выберу утром.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 11:30</div>
+          <div class="step-text">Прибытие в Суздаль. Паркуемся, разминаем ноги.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2: День -->
+    <div class="phase">
+      <div class="phase-head">
+        <div class="phase-num">02</div>
+        <div class="phase-title">День · гуляем</div>
+        <div class="phase-sub">~ 8 часов</div>
+      </div>
+      <div class="phase-steps">
+        <div class="step">
+          <div class="step-time">~ 11:30</div>
+          <div class="step-text">Прогулка по старому городу. Кремль, торговые ряды, набережная Каменки.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 14:00</div>
+          <div class="step-text">Обед в одном из локальных мест. Точку выберу по настроению.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 15:30</div>
+          <div class="step-text">Ещё прогулка — другая часть города, монастыри, виды на луга.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3: SECRET -->
+    <div class="secret">
+      <div class="secret-label">
+        Глава 04 · пункт под печатью
+      </div>
+      <div class="secret-title">Музейная программа.<br>Раскрою на месте.</div>
+      <div class="secret-text">
+        Несколько музеев в Суздале выбраны заранее. Какие именно — пусть пока останется загадкой. Знаю, что тебе понравится. Скажу только, что один — самый известный, а другой ты, скорее всего, не ожидаешь.
+      </div>
+      <!-- wax seal -->
+      <svg class="secret-seal" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="38" fill="#97443e"/>
+        <circle cx="50" cy="50" r="38" fill="url(#sealGrad)" opacity="0.5"/>
+        <defs>
+          <radialGradient id="sealGrad" cx="35%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#c87870" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#97443e" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="32" fill="none" stroke="#c9a85c" stroke-width="0.8" stroke-dasharray="2 3" opacity="0.7"/>
+        <text x="50" y="44" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="15" fill="#f2e7d0" letter-spacing="0.1em">SCRT</text>
+        <text x="50" y="60" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="8" fill="#f2e7d0" letter-spacing="0.15em">29.05.26</text>
+        <line x1="32" y1="68" x2="68" y2="68" stroke="#c9a85c" stroke-width="0.6" opacity="0.6"/>
+      </svg>
+    </div>
+
+    <!-- Phase 4: Вечер -->
+    <div class="phase" style="margin-top: 30px;">
+      <div class="phase-head">
+        <div class="phase-num">03</div>
+        <div class="phase-title">Вечер · домой</div>
+        <div class="phase-sub">~ 3,5 часа</div>
+      </div>
+      <div class="phase-steps">
+        <div class="step">
+          <div class="step-time">~ 19:30</div>
+          <div class="step-text">Ужин в Суздале. Что-то размеренное, не на бегу.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 21:00</div>
+          <div class="step-text">Выезжаем обратно. Дорога красивая на закате.</div>
+        </div>
+        <div class="step">
+          <div class="step-time">~ 23:00</div>
+          <div class="step-text">Дом. Можно лежать.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUTE -->
+  <div class="route-section">
+    <div class="section-label">Маршрут · Москва → Суздаль</div>
+    <div class="route-wrap">
+      <svg class="route-svg" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="rdots" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+            <circle cx="1.5" cy="1.5" r="0.6" fill="rgba(36,74,110,0.10)"/>
+          </pattern>
+          <filter id="softR" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+            <feOffset dx="0" dy="2"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <rect width="600" height="200" fill="url(#rdots)" opacity="0.6"/>
+
+        <!-- the road - winding line -->
+        <path d="M 65 100 Q 200 80 290 110 Q 380 135 530 100"
+              stroke="#244a6e" stroke-width="2" fill="none"
+              stroke-dasharray="6 6" stroke-linecap="round" opacity="0.7"/>
+
+        <!-- start dot - MOSCOW -->
+        <g transform="translate(65, 100)" filter="url(#softR)">
+          <circle r="22" fill="#244a6e"/>
+          <text y="5" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="11" fill="#f2e7d0">МСК</text>
+        </g>
+        <text x="65" y="148" text-anchor="middle" font-family="Unbounded" font-weight="700" font-size="13" fill="#1c1610">МОСКВА</text>
+        <text x="65" y="164" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="#6b5d48">~ 09:00 выезд</text>
+
+        <!-- breakfast stop -->
+        <g transform="translate(225, 90)" filter="url(#softR)">
+          <circle r="13" fill="#ad8a3f"/>
+          <text y="4" text-anchor="middle" font-family="Manrope" font-weight="900" font-size="11" fill="#f2e7d0">☕</text>
+        </g>
+        <text x="225" y="64" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="#ad8a3f">завтрак</text>
+
+        <!-- end dot - SUZDAL -->
+        <g transform="translate(530, 100)" filter="url(#softR)">
+          <circle r="26" fill="#244a6e"/>
+          <text y="-3" text-anchor="middle" font-family="Unbounded" font-weight="900" font-size="10" fill="#f2e7d0">СУЗ</text>
+          <!-- little dome -->
+          <path d="M -7 18 C -7 12, -4 9, 0 7 C 4 9, 7 12, 7 18 Z" fill="#ad8a3f"/>
+          <line x1="0" y1="7" x2="0" y2="2" stroke="#ad8a3f" stroke-width="1"/>
+        </g>
+        <text x="530" y="148" text-anchor="middle" font-family="Unbounded" font-weight="700" font-size="13" fill="#1c1610">СУЗДАЛЬ</text>
+        <text x="530" y="164" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-size="12" fill="#6b5d48">~ 11:30 прибытие</text>
+
+        <!-- distance label in middle -->
+        <g transform="translate(355, 140)">
+          <rect x="-58" y="-13" width="116" height="26" rx="13" fill="#f7eed8" stroke="#244a6e" stroke-width="1"/>
+          <text text-anchor="middle" y="4" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#244a6e">~ 220 км · М-7</text>
+        </g>
+
+        <!-- compass top right -->
+        <g transform="translate(540, 28)">
+          <circle r="16" fill="rgba(247,238,216,0.6)" stroke="rgba(28,22,16,0.20)" stroke-width="1"/>
+          <line x1="0" y1="-12" x2="0" y2="12" stroke="rgba(28,22,16,0.30)" stroke-width="0.7"/>
+          <polygon points="0,-12 -3,-3 3,-3" fill="#244a6e"/>
+          <text x="0" y="-20" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#1c1610" font-weight="700">С</text>
+        </g>
+
+      </svg>
+    </div>
+  </div>
+
+  <!-- DETAILS -->
+  <div class="details">
+    <div class="section-label">Что важно</div>
+
+    <div class="detail-row">
+      <div class="detail-key">Расстояние</div>
+      <div class="detail-val"><strong>~ 220 км</strong> по М-7 «Волга». В одну сторону — около 2–2,5 часов в зависимости от трафика.</div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-key">Что взять</div>
+      <div class="detail-val">Удобную обувь (много ходим по брусчатке). Тёплую кофту на вечер — после заката в мае ещё прохладно. Воду, плед в машину.</div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-key">Что не надо</div>
+      <div class="detail-val">Ноутбук. Мысли про защиту. Расписание по минутам.</div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-key">Точка сбора</div>
+      <div class="detail-val">Спущусь к подъезду в 09:00. Если опаздываешь — это нормально, едем по факту готовности.</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

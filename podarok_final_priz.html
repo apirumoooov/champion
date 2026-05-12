@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чемпион · Финальный приз</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #161210;
+  --paper: #1f1814;
+  --paper-elev: #221b16;
+  --ink: #f3e8d0;
+  --ink-mute: #a89678;
+  --ink-faint: #6b5a44;
+  --accent: #d4af55;
+  --accent-bright: #e8c577;
+  --accent-deep: #a6862e;
+  --cream: #f3e8d0;
+  --red: #b54e44;
+  --line: rgba(212,175,85,0.18);
+  --line-soft: rgba(212,175,85,0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Manrope', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+body {
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(212,175,85,0.16), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(212,175,85,0.10), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 50%, rgba(181,78,68,0.06), transparent 60%),
+    var(--bg);
+  background-attachment: fixed;
+  padding: 24px 16px 60px;
+  position: relative;
+}
+
+/* film grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.18 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--paper-elev);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(212,175,85,0.06),
+    0 0 60px rgba(212,175,85,0.10),
+    0 40px 80px -20px rgba(0,0,0,0.6);
+}
+
+/* gold corner ornaments */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--accent);
+  z-index: 3;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.card::before {
+  top: 14px;
+  left: 14px;
+  border-right: none;
+  border-bottom: none;
+}
+.card::after {
+  bottom: 14px;
+  right: 14px;
+  border-left: none;
+  border-top: none;
+}
+
+/* TOP STRIP */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 36px;
+  border-bottom: 1px dashed var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.2);
+}
+
+.top .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 14px var(--accent);
+  animation: shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.78); }
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  padding: 56px 36px 36px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "IV";
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 460px;
+  color: rgba(212,175,85,0.04);
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+.eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "";
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(50px, 13vw, 110px);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  margin-bottom: 8px;
+  color: var(--cream);
+}
+
+.title .italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 2.5vw, 17px);
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  margin-top: 22px;
+}
+
+/* MEDALLION */
+.medallion-wrap {
+  margin: 38px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.medallion-svg {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 8px 30px rgba(212,175,85,0.25));
+}
+
+/* MESSAGE */
+.message {
+  padding: 44px 36px 32px;
+  border-top: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+}
+
+.message-hi {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 4.4vw, 30px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 22px;
+  color: var(--cream);
+}
+
+.message-hi .accent {
+  color: var(--accent);
+}
+
+.message-body {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.message-body p + p { margin-top: 14px; }
+
+.message-body strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.message-body em {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent-bright);
+  font-size: 1.08em;
+}
+
+/* CHAPTERS RECAP */
+.recap-section {
+  padding: 40px 36px 16px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.chapters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.chap-tile {
+  position: relative;
+  padding: 16px 16px 18px;
+  background: rgba(212,175,85,0.04);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chap-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chap-num .check {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chap-num .check svg {
+  width: 9px;
+  height: 9px;
+  stroke: var(--paper-elev);
+  fill: none;
+  stroke-width: 3.5;
+}
+
+.chap-name {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.chap-what {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+
+/* FINAL PRIZE BLOCK */
+.prize {
+  position: relative;
+  margin: 24px 36px 36px;
+  padding: 34px 30px 36px;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(212,175,85,0.05) 0 14px,
+      transparent 14px 28px),
+    linear-gradient(135deg, rgba(181,78,68,0.06), rgba(212,175,85,0.10));
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.prize::before {
+  content: "?";
+  position: absolute;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 320px;
+  color: rgba(212,175,85,0.06);
+  top: -80px;
+  right: -40px;
+  line-height: 1;
+  pointer-events: none;
+  letter-spacing: -0.05em;
+}
+
+.prize-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prize-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 4px, transparent 4px 8px);
+  max-width: 280px;
+  opacity: 0.7;
+}
+
+.prize-title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(28px, 5.5vw, 38px);
+  letter-spacing: -0.025em;
+  color: var(--cream);
+  margin-bottom: 14px;
+  line-height: 1.02;
+}
+
+.prize-title .italic {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+
+.prize-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink);
+  max-width: 540px;
+  position: relative;
+  z-index: 1;
+}
+
+.prize-text p + p { margin-top: 12px; }
+
+.prize-text strong {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* LOCK ICON */
+.prize-lock {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.prize-lock svg {
+  width: 26px;
+  height: 26px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* TIMELINE TO PRIZE */
+.timeline-section {
+  padding: 12px 36px 32px;
+}
+
+.tl {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  position: relative;
+  padding-top: 18px;
+}
+
+.tl::before {
+  content: "";
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  top: 38px;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--accent) 0 5px, transparent 5px 10px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.tl-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tl-bullet {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--paper-elev);
+  border: 2px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.tl-step.final .tl-bullet {
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(212,175,85,0.5);
+}
+
+.tl-bullet svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  fill: none;
+  stroke-width: 2;
+}
+
+.tl-step.final .tl-bullet svg {
+  stroke: var(--paper-elev);
+}
+
+.tl-name {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.tl-step.final .tl-name {
+  color: var(--accent);
+}
+
+.tl-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-mute);
+  line-height: 1.3;
+}
+
+/* SIGNATURE */
+.sig {
+  padding: 28px 36px;
+  border-top: 1px dashed var(--line);
+  text-align: center;
+  background: rgba(0,0,0,0.2);
+}
+
+.sig-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+}
+
+.sig-line .gold {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* responsive */
+@media (max-width: 540px) {
+  .hero { padding: 44px 24px 26px; }
+  .message, .recap-section, .timeline-section { padding-left: 24px; padding-right: 24px; }
+  .prize { margin-left: 24px; margin-right: 24px; padding: 26px 22px 28px; }
+  .top, .sig { padding-left: 24px; padding-right: 24px; }
+  .chapters-grid { grid-template-columns: 1fr; }
+  .hero::before { font-size: 280px; top: -10px; }
+  .prize::before { font-size: 200px; }
+  .prize-lock { width: 44px; height: 44px; top: 18px; right: 18px; }
+  .prize-lock svg { width: 20px; height: 20px; }
+  .tl { grid-template-columns: 1fr; gap: 18px; }
+  .tl::before { display: none; }
+  .card::before, .card::after { width: 24px; height: 24px; top: 10px; left: 10px; }
+  .card::after { top: auto; left: auto; bottom: 10px; right: 10px; }
+}
+
+@media print {
+  body { background: white; padding: 0; }
+  .card { max-width: 100%; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- TOP STRIP -->
+  <div class="top">
+    <div class="left">
+      <span class="dot"></span>
+      <span>Серия закрыта · 4 из 4</span>
+    </div>
+    <div class="right">Финал</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Сертификат · финал серии</div>
+    <h1 class="title"><span class="italic">Чемпион.</span></h1>
+    <div class="subtitle">Серия 04 / 04 · Все главы взяты</div>
+
+    <!-- MEDALLION -->
+    <div class="medallion-wrap">
+      <svg class="medallion-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="goldGrad" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#f4d97a"/>
+            <stop offset="40%" stop-color="#d4af55"/>
+            <stop offset="100%" stop-color="#8a6b1c"/>
+          </radialGradient>
+          <radialGradient id="goldInner" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#1f1814"/>
+            <stop offset="100%" stop-color="#0a0805"/>
+          </radialGradient>
+          <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e8c577"/>
+            <stop offset="50%" stop-color="#a6862e"/>
+            <stop offset="100%" stop-color="#d4af55"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Ribbon trails behind -->
+        <path d="M 95 240 L 60 310 L 100 290 L 110 270 Z" fill="#b54e44" opacity="0.85"/>
+        <path d="M 225 240 L 260 310 L 220 290 L 210 270 Z" fill="#b54e44" opacity="0.85"/>
+        <path d="M 95 240 L 60 310 L 78 300 L 102 260 Z" fill="#8a3530" opacity="0.6"/>
+        <path d="M 225 240 L 260 310 L 242 300 L 218 260 Z" fill="#8a3530" opacity="0.6"/>
+
+        <!-- Outer ring -->
+        <circle cx="160" cy="155" r="115" fill="url(#goldGrad)"/>
+        <circle cx="160" cy="155" r="115" fill="none" stroke="#8a6b1c" stroke-width="2" opacity="0.6"/>
+
+        <!-- Inner dark face -->
+        <circle cx="160" cy="155" r="98" fill="url(#goldInner)"/>
+        <circle cx="160" cy="155" r="98" fill="none" stroke="#d4af55" stroke-width="1.5" opacity="0.5"/>
+
+        <!-- Decorative inner ring (engraved) -->
+        <circle cx="160" cy="155" r="88" fill="none" stroke="#d4af55" stroke-width="0.6" stroke-dasharray="1 3" opacity="0.7"/>
+
+        <!-- Big IV -->
+        <text x="160" y="178" text-anchor="middle" font-family="Cormorant Garamond" font-style="italic" font-weight="500" font-size="92" fill="url(#goldRing)" letter-spacing="-0.03em">IV</text>
+
+        <!-- Subtle stars -->
+        <g fill="#d4af55" opacity="0.7">
+          <circle cx="160" cy="98" r="1.8"/>
+          <circle cx="160" cy="220" r="1.8"/>
+          <circle cx="100" cy="160" r="1.8"/>
+          <circle cx="220" cy="160" r="1.8"/>
+        </g>
+
+        <!-- Laurel branches left -->
+        <g transform="translate(160, 155)">
+          <g transform="rotate(-90)">
+            <!-- left laurel -->
+            <g opacity="0.85">
+              <path d="M -116 0 Q -136 -18 -154 -10" stroke="#d4af55" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="-122" cy="-6" rx="8" ry="3.5" fill="#d4af55" transform="rotate(-30 -122 -6)" opacity="0.85"/>
+              <ellipse cx="-130" cy="-13" rx="9" ry="3.5" fill="#d4af55" transform="rotate(-35 -130 -13)" opacity="0.85"/>
+              <ellipse cx="-140" cy="-16" rx="9" ry="3.5" fill="#d4af55" transform="rotate(-40 -140 -16)" opacity="0.85"/>
+              <ellipse cx="-148" cy="-15" rx="8" ry="3.5" fill="#d4af55" transform="rotate(-50 -148 -15)" opacity="0.85"/>
+              <ellipse cx="-125" cy="2" rx="8" ry="3.5" fill="#a6862e" transform="rotate(20 -125 2)"/>
+              <ellipse cx="-135" cy="-2" rx="9" ry="3.5" fill="#a6862e" transform="rotate(15 -135 -2)"/>
+              <ellipse cx="-145" cy="-5" rx="8" ry="3.5" fill="#a6862e" transform="rotate(10 -145 -5)"/>
+            </g>
+            <!-- right laurel mirrored -->
+            <g opacity="0.85">
+              <path d="M 116 0 Q 136 -18 154 -10" stroke="#d4af55" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="122" cy="-6" rx="8" ry="3.5" fill="#d4af55" transform="rotate(30 122 -6)" opacity="0.85"/>
+              <ellipse cx="130" cy="-13" rx="9" ry="3.5" fill="#d4af55" transform="rotate(35 130 -13)" opacity="0.85"/>
+              <ellipse cx="140" cy="-16" rx="9" ry="3.5" fill="#d4af55" transform="rotate(40 140 -16)" opacity="0.85"/>
+              <ellipse cx="148" cy="-15" rx="8" ry="3.5" fill="#d4af55" transform="rotate(50 148 -15)" opacity="0.85"/>
+              <ellipse cx="125" cy="2" rx="8" ry="3.5" fill="#a6862e" transform="rotate(-20 125 2)"/>
+              <ellipse cx="135" cy="-2" rx="9" ry="3.5" fill="#a6862e" transform="rotate(-15 135 -2)"/>
+              <ellipse cx="145" cy="-5" rx="8" ry="3.5" fill="#a6862e" transform="rotate(-10 145 -5)"/>
+            </g>
+          </g>
+        </g>
+
+        <!-- Small star on top -->
+        <g transform="translate(160, 45)">
+          <polygon points="0,-12 3.5,-3.7 12,-3.7 5,2.5 7.5,11 0,5.5 -7.5,11 -5,2.5 -12,-3.7 -3.5,-3.7"
+                   fill="#e8c577"/>
+          <polygon points="0,-12 3.5,-3.7 12,-3.7 5,2.5 7.5,11 0,5.5 -7.5,11 -5,2.5 -12,-3.7 -3.5,-3.7"
+                   fill="none" stroke="#8a6b1c" stroke-width="0.6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- MESSAGE -->
+  <div class="message">
+    <div class="message-hi">Поздравляю, <span class="accent">чемпион.</span></div>
+    <div class="message-body">
+      <p>Ты прошла все <strong>четыре главы</strong>. Прыжок, день отдыха, шпагаты при 36°, Суздаль — серия закрыта. Я обещал приз за серию, и приз есть.</p>
+      <p>Но <em>не сейчас</em>.</p>
+      <p>Финальный приз лежит запечатанным до того дня, когда ВУЗ <strong>окончательно</strong> закончится. Не до защиты — после. Когда уже всё-всё-всё: подписи, ведомости, дипломная сессия в архив.</p>
+      <p>Никаких подсказок. Никаких намёков. Просто знай, что приз ждёт тебя на финише.</p>
+    </div>
+  </div>
+
+  <!-- CHAPTERS RECAP -->
+  <div class="recap-section">
+    <div class="section-label">Серия · что было пройдено</div>
+    <div class="chapters-grid">
+      <div class="chap-tile">
+        <div class="chap-num">
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>
+          Глава 01
+        </div>
+        <div class="chap-name">Прыжок</div>
+        <div class="chap-what">25 метров вниз · Манихино</div>
+      </div>
+
+      <div class="chap-tile">
+        <div class="chap-num">
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>
+          Глава 02
+        </div>
+        <div class="chap-name">День отдыха</div>
+        <div class="chap-what">Флоат · Третьяковка · Ужин</div>
+      </div>
+
+      <div class="chap-tile">
+        <div class="chap-num">
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>
+          Глава 03
+        </div>
+        <div class="chap-name">Шпагат 36°</div>
+        <div class="chap-what">Hot Stretching · Лужники</div>
+      </div>
+
+      <div class="chap-tile">
+        <div class="chap-num">
+          <span class="check"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span>
+          Глава 04
+        </div>
+        <div class="chap-name">Суздаль</div>
+        <div class="chap-what">День вне Москвы · 29 мая</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL PRIZE BLOCK -->
+  <div class="prize">
+    <div class="prize-lock">
+      <svg viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2"/>
+        <path d="M8 11V7a4 4 0 018 0v4"/>
+        <circle cx="12" cy="16" r="1.2" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="prize-label">
+      Финальный приз · запечатан
+    </div>
+    <div class="prize-title">Финал <span class="italic">ждёт</span><br>момента.</div>
+    <div class="prize-text">
+      <p>Что именно — узнаешь, когда откроешь. А откроется приз только в тот день, когда <strong>ВУЗ закроется полностью</strong>: после защиты, после всех подписей, когда уже окончательно «всё».</p>
+      <p>Тогда я появлюсь с этим в руках. Не раньше.</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE TO PRIZE -->
+  <div class="timeline-section">
+    <div class="section-label">Куда дальше</div>
+    <div class="tl">
+      <div class="tl-step">
+        <div class="tl-bullet">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+        </div>
+        <div class="tl-name">Сейчас</div>
+        <div class="tl-desc">серия закрыта</div>
+      </div>
+      <div class="tl-step">
+        <div class="tl-bullet">
+          <svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 012-2h10l4 4v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </div>
+        <div class="tl-name">Защита</div>
+        <div class="tl-desc">пройдёт — спокойно</div>
+      </div>
+      <div class="tl-step final">
+        <div class="tl-bullet">
+          <svg viewBox="0 0 24 24"><path d="M20 12V8H4v4M20 12v8H4v-8M20 12H4M12 4v16"/></svg>
+        </div>
+        <div class="tl-name">Приз</div>
+        <div class="tl-desc">когда всё закончится</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="sig">
+    <div class="sig-line">
+      Серия из четырёх глав — <span class="gold">пройдена</span>.<br>
+      Финал — <span class="gold">в пути</span>.
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
